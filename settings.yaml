@@ -1,0 +1,29 @@
+fastapi:
+  title: User Management
+  description: |
+    > User Management application with `FastAPI`, `Pydantic` and `SQLAlchemy` ✌️.
+
+    ## Default
+
+    - Health Check for web-app.
+
+    ## Auth
+
+    - User can authenticate themselves.
+
+    ## Admin
+
+    Admin will be able to:
+
+    - **Create users**.
+    - **Read users**.
+    - **Update users**.
+    - **Delete users**.
+
+  docs_url: "/docs"
+  redoc_url: "/redoc"
+  access_token_expire_minutes: 60
+  algorithm: HS256
+
+database:
+  uri: "sqlite+pysqlite:///db.sqlite3"
