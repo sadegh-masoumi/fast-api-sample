@@ -4,5 +4,7 @@ Since pydantic has a released version v2, there are some task we need to do for 
 
 - [ ] Update from Pydantic v1 to v2
 - [ ] Check for any major security leaks (like plain text password or token)
+- [ ] Add **Phone Number** and **Last Login** columns to `user_account` table.
+- [ ] Provide an endpoint for **User Profile**.
 - [ ] Write tests for this code for future purposes (If you want to refactor code while writing test, you're free to do so.)
 - [ ] Dockerize this project
