@@ -11,7 +11,7 @@ from fastapi_user_management.config import SETTINGS
 from fastapi_user_management.core.database import engine
 from fastapi_user_management.core.init_db import init_db
 from fastapi_user_management.models.base import Base
-from fastapi_user_management.routes import admin, auth
+from fastapi_user_management.routes import admin, auth, dicom, profile
 
 
 def create_db_and_tables() -> None:
@@ -47,3 +47,6 @@ def main() -> dict[str, str]:
 
 app.include_router(admin.router)
 app.include_router(auth.router)
+# New Routers
+app.include_router(profile.router)
+app.include_router(dicom.router)

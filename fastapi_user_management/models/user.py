@@ -43,18 +43,24 @@ class UserModel(Base):
     fullname: Mapped[str] = mapped_column(String, nullable=False, unique=False)
     username: Mapped[str] = mapped_column(String, nullable=False, unique=True)
     password: Mapped[str] = mapped_column(String, nullable=False, unique=False)
+    phone_number: Mapped[int] = mapped_column(Integer, nullable=True, unique=False)
+
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, unique=False
     )
     status: Mapped[UserStatusValues] = mapped_column(
         Enum(UserStatusValues), nullable=False, default=UserStatusValues.PENDING
     )
+    last_login: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=True, default=None
+    )
+
     roles: Mapped[list["RoleModel"]] = relationship(
         "RoleModel", secondary="user_role", backref=backref("users", lazy="dynamic")
     )
 
     @validates("username")
-    def validate_email(self, key: str, username: str) -> str:
+    def validate_username(self, key: str, username: str) -> str:
         """Simple email validator.
 
         Args:
@@ -66,7 +72,17 @@ class UserModel(Base):
         """
         if "@" not in username:
             raise ValueError("Failed simple email validation")
+        if username == "":
+            raise ValueError("username must be set!")
+
         return username
+
+    @validates("fullname")
+    def validate_fullname(self, key: str, fullname: str) -> str:
+        if fullname == "":
+            raise ValueError("fullname must be set!")
+
+        return fullname
 
     def __repr__(self) -> str:
         """Database object representation.

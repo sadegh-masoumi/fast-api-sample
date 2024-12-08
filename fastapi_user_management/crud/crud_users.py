@@ -125,6 +125,9 @@ class CRUDUser(CRUDBase[UserModel, BaseUserCreate | UserCreate, UserUpdate]):
             return None
         if not verify_password(password, user.password):
             return None
+        # Update Last Login
+        user.last_login = datetime.utcnow()
+        db.commit()
         return user
 
     def remove_by_username(self, db: Session, *, username: EmailStr) -> UserModel:

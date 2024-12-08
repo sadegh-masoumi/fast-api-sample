@@ -8,12 +8,14 @@ class RoleBase(BaseModel):
     """Base Schema for role."""
 
     name: RoleNames | None = None
-    class Config:
-        orm_mode = True
+    model_config = {
+        "orm_mode": True,
+    }
 
 
 class RoleCreate(RoleBase):
 
     name: RoleNames
-    class Config:
-        orm_mode = True
+    model_config = {
+        "orm_mode": True,
+    }

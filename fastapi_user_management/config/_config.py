@@ -6,6 +6,8 @@ from pydantic import EmailStr, BaseSettings
 from fastapi_user_management import __version__
 
 APP_CUSTOM_CONFIG = OmegaConf.load("settings.yaml")
+
+
 class Settings(BaseSettings):
     SECRET_KEY: str = "1b4b4007cad00857be4cbc27e6b73882f4ba6344e10cbb45f667ca9c72ed821f"
 
@@ -28,9 +30,7 @@ class Settings(BaseSettings):
 
     DATABASE_URI: str = APP_CUSTOM_CONFIG.database.uri
 
-    class Config:
-        env_file = ".env"
-        case_sensitive = True
+    model_config = {"env_file": ".env", "case_sensitive": True}
 
 
 SETTINGS = Settings()
